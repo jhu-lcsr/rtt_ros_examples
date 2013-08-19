@@ -104,36 +104,26 @@ using namespace RTT;
 
 int ORO_main(int argc, char** argv)
 {
-  // Uncomment to debug RTT_COMPONENT_PATH
-  //std::string RTT_COMPONENT_PATH;
-  //RTT_COMPONENT_PATH = std::string(getenv("RTT_COMPONENT_PATH"));
-  //RTT::log(RTT::Error) << "RTT_COMPONENT_PATH: " << RTT_COMPONENT_PATH <<std::endl;
-  //RTT::ComponentLoader::Instance()->setComponentPath(RTT_COMPONENT_PATH);
-
-  //RTT::plugin::PluginLoader::Instance()->loadTypekits("rtt");
-
   // Get a pointer to the component above
   OCL::DeploymentComponent deployer("deployer");
-  
-  // Need to import the typekit on the server
-  deployer.import("rtt_ros");
-  deployer.import("rtt_rosnode");
-  deployer.import("rtt_roscomm");
-  deployer.import("rtt_actionlib");
 
+  RTT::Logger::Instance()->setLogLevel(RTT::Logger::Debug);
+  
+  // Import the necessary plugins
+  deployer.import("rtt_ros");
+  deployer.getProvider<RTT::Scripting>("scripting")->eval("ros.import(\"rtt_actionlib_examples\");");
+  
+  // Create an instance of our component
   SomeComponent some_component("some_component");
   deployer.addPeer(&some_component);
 
+  // Connect the component to some ros topics
   std::string script = "\
-    import(\"rtt_ros\");\
-    ros.import(\"rtt_actionlib_examples\");\
     loadService(\"some_component\",\"actionlib\");\
     some_component.actionlib.connect(\"/some/ros/namespace/my_action\");";
-
   deployer.getProvider<RTT::Scripting>("scripting")->eval(script);
 
-
-  // Interface it:
+  // Interactive task browser
   OCL::TaskBrowser browse( &deployer );
   browse.loop();
 

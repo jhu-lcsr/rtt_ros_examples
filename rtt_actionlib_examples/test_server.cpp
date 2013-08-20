@@ -123,6 +123,14 @@ int ORO_main(int argc, char** argv)
     some_component.actionlib.connect(\"/some/ros/namespace/my_action\");";
   deployer.getProvider<RTT::Scripting>("scripting")->eval(script);
 
+  // Create an activity for processing the action
+  Activity activity( 15, 0.05 ); // priority=15, period=20Hz
+  some_component.setActivity(&activity);
+
+  // Start the server
+  some_component.configure();
+  some_component.start();
+
   // Interactive task browser
   OCL::TaskBrowser browse( &deployer );
   browse.loop();

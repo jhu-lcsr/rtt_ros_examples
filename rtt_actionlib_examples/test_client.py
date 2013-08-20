@@ -9,9 +9,7 @@ if __name__ == '__main__':
 
     client = actionlib.SimpleActionClient('/some/ros/namespace/my_action', 
             rtt_actionlib_examples.msg.SomeActionAction)
-
     client.wait_for_server()
-
     goal = rtt_actionlib_examples.msg.SomeActionGoal(rospy.Duration(3.0))
 
     print("Sending a goal to wait for 3.0 seconds...")

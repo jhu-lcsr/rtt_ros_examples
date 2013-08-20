@@ -13,7 +13,7 @@ the percentage complete. This example can be run by running the sever in one
 shell:
 
 ```bash
-rosrun rtt_actionlib_examples test_server-$OROCOS_TARGET
+rosrun rtt_actionlib_examples test_server-gnulinux
 ```
 
 Then you can easily call the server from another shell:

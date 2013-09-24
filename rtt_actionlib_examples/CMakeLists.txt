@@ -18,9 +18,15 @@ ros_generate_rtt_typekit(${PROJECT_NAME})
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS})
 
-orocos_use_package(ocl-deployment)
-orocos_use_package(ocl-taskbrowser)
+orocos_use_package(ocl-deployment REQUIRED)
+orocos_use_package(ocl-taskbrowser REQUIRED)
+orocos_find_package(ocl-taskbrowser REQUIRED)
 
 orocos_executable(test_server test_server.cpp)
-target_link_libraries(test_server ${catkin_LIBRARIES} ${OROCOS-RTT_RTT-SCRIPTING_LIBRARY})
+target_link_libraries(
+  test_server 
+  ${catkin_LIBRARIES} 
+  ${OROCOS-RTT_RTT-SCRIPTING_LIBRARY} 
+  ${USE_OROCOS_LIBRARIES}
+  )
 add_dependencies(test_server ${${PROJECT_NAME}_EXPORTED_TARGETS})

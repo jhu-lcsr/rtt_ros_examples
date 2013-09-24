@@ -20,7 +20,6 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS})
 
 orocos_use_package(ocl-deployment REQUIRED)
 orocos_use_package(ocl-taskbrowser REQUIRED)
-orocos_find_package(ocl-taskbrowser REQUIRED)
 
 orocos_executable(test_server test_server.cpp)
 target_link_libraries(

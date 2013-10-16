@@ -9,11 +9,6 @@ catkin_package(
   CATKIN_DEPENDS rtt_ros 
 )
 
-find_package(OROCOS-RTT REQUIRED)
-
-# Defines the orocos_* cmake macros. See that file for additional
-# documentation.
-include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 add_definitions(-DRTT_COMPONENT)
 orocos_component(${PROJECT_NAME} src/HelloRobot.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})

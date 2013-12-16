@@ -5,7 +5,6 @@ project(rtt_ros_integration_example)
 find_package(catkin REQUIRED COMPONENTS rtt_ros)
 
 catkin_package(
-  DEPENDS rtt 
   CATKIN_DEPENDS rtt_ros 
 )
 

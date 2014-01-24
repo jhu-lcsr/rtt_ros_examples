@@ -81,7 +81,7 @@ public:
   // Accept/reject goal requests here
   void goalCallback(GoalHandle gh) {
     // Always preempt the current goal and accept the new one
-    if(current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
+    if(current_gh_.isValid() && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
       result_.actual_delay_time = rtt_ros::clock::rtt_now() - current_gh_.getGoalID().stamp;
       current_gh_.setCanceled(result_);
     }

@@ -14,7 +14,7 @@
 
 #include <actionlib/action_definition.h>
 #include <rtt_actionlib_examples/SomeActionAction.h>
-#include <rtt_ros/time.h>
+#include <rtt_ros/clock.h>
 
 class SomeComponent : public RTT::TaskContext 
 {
@@ -63,7 +63,7 @@ public:
     if(current_gh_.isValid() && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
       double percent_complete = 
         100.0 *
-        (rtt_ros::time::now() - current_gh_.getGoalID().stamp).toSec() /
+        (rtt_ros::clock::rtt_now() - current_gh_.getGoalID().stamp).toSec() /
         (current_gh_.getGoal()->delay_time.toSec());
 
       // Publish feedback
@@ -72,7 +72,7 @@ public:
 
       // Set succeded if complete
       if(percent_complete >= 100.0) {
-        result_.actual_delay_time = rtt_ros::time::now() - current_gh_.getGoalID().stamp;
+        result_.actual_delay_time = rtt_ros::clock::rtt_now() - current_gh_.getGoalID().stamp;
         current_gh_.setSucceeded(result_);
       }
     }
@@ -82,7 +82,7 @@ public:
   void goalCallback(GoalHandle gh) {
     // Always preempt the current goal and accept the new one
     if(current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
-      result_.actual_delay_time = rtt_ros::time::now() - current_gh_.getGoalID().stamp;
+      result_.actual_delay_time = rtt_ros::clock::rtt_now() - current_gh_.getGoalID().stamp;
       current_gh_.setCanceled(result_);
     }
     gh.setAccepted();
@@ -92,7 +92,7 @@ public:
   // Handle preemption here
   void cancelCallback(GoalHandle gh) {
     if(current_gh_ == gh && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
-      result_.actual_delay_time = rtt_ros::time::now() - current_gh_.getGoalID().stamp;
+      result_.actual_delay_time = rtt_ros::clock::rtt_now() - current_gh_.getGoalID().stamp;
       current_gh_.setCanceled(result_);
     }
   }

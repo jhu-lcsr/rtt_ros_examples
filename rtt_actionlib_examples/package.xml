@@ -14,8 +14,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>ocl</build_depend>
-  <build_depend>ocl-deployment</build_depend>
-  <build_depend>ocl-taskbrowser</build_depend>
   <build_depend>rtt</build_depend>
   <build_depend>rtt_ros</build_depend>
   <build_depend>rtt_rosclock</build_depend>

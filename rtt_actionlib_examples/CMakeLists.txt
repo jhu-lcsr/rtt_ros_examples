@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(rtt_actionlib_examples)
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp rtt_ros actionlib rtt_actionlib actionlib_msgs rtt_actionlib_msgs genmsg rtt_roscomm)
+  roscpp rtt_ros actionlib actionlib_msgs genmsg rtt_roscomm)
 
 add_action_files(DIRECTORY action FILES SomeAction.action)
 generate_messages(DEPENDENCIES actionlib_msgs)

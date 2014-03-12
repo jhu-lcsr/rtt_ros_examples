@@ -11,7 +11,7 @@ ros_generate_rtt_typekit(${PROJECT_NAME})
 
 catkin_package()
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS} ${USE_OROCOS_INCLUDE_DIRS})
 
 orocos_use_package(ocl-deployment REQUIRED)
 orocos_use_package(ocl-taskbrowser REQUIRED)

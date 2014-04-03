@@ -63,7 +63,7 @@ public:
     if(current_gh_.isValid() && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
       double percent_complete = 
         100.0 *
-        (rtt_rosclock::host_rt_now() - current_gh_.getGoalID().stamp).toSec() /
+        (rtt_rosclock::host_now() - current_gh_.getGoalID().stamp).toSec() /
         (current_gh_.getGoal()->delay_time.toSec());
 
       // Publish feedback
@@ -72,7 +72,7 @@ public:
 
       // Set succeded if complete
       if(percent_complete >= 100.0) {
-        result_.actual_delay_time = rtt_rosclock::host_rt_now() - current_gh_.getGoalID().stamp;
+        result_.actual_delay_time = rtt_rosclock::host_now() - current_gh_.getGoalID().stamp;
         current_gh_.setSucceeded(result_);
       }
     }
@@ -82,7 +82,7 @@ public:
   void goalCallback(GoalHandle gh) {
     // Always preempt the current goal and accept the new one
     if(current_gh_.isValid() && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
-      result_.actual_delay_time = rtt_rosclock::host_rt_now() - current_gh_.getGoalID().stamp;
+      result_.actual_delay_time = rtt_rosclock::host_now() - current_gh_.getGoalID().stamp;
       current_gh_.setCanceled(result_);
     }
     gh.setAccepted();
@@ -92,7 +92,7 @@ public:
   // Handle preemption here
   void cancelCallback(GoalHandle gh) {
     if(current_gh_ == gh && current_gh_.getGoalStatus().status == actionlib_msgs::GoalStatus::ACTIVE) {
-      result_.actual_delay_time = rtt_rosclock::host_rt_now() - current_gh_.getGoalID().stamp;
+      result_.actual_delay_time = rtt_rosclock::host_now() - current_gh_.getGoalID().stamp;
       current_gh_.setCanceled(result_);
     }
   }

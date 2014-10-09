@@ -2,7 +2,9 @@
   <arg name="LUA" default="true"/>
 
   <include if="$(arg LUA)" file="$(find rtt_ros)/launch/ldeployer.launch">
-    <arg name="LUA_SCRIPTS" value="$(find rtt_ros_integration_example)/example.lua"/>
+    <arg name="DEPLOYER_ARGS" value="-g -s $(find rtt_ros_integration_example)/example.lua"/>
+    <arg name="LOG_LEVEL" value="debug"/>
+    <arg name="DEBUG" value="false"/>
   </include>
 
   <include unless="$(arg LUA)" file="$(find rtt_ros)/launch/deployer.launch">

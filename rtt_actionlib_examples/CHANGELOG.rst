@@ -2,8 +2,8 @@
 Changelog for package rtt_actionlib_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2014-12-08)
+------------------
 * rtt_rosclock api changes
 * fixing problem when building in isolation
 * Cleaning up cmakelists

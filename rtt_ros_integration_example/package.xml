@@ -1,6 +1,6 @@
 <package>
   <name>rtt_ros_integration_example</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>rtt_ros_integration_example provides a very basic example. A HelloRobot component with two input and two output ports is created. You can use 'rostopic echo/pub' to read from and write to them, e.g: rostopic pub /string_in std_msgs/String 'Hi, HelloRobot component'</description>
   <maintainer email="ruben.smits@mech.kuleuven.be">Ruben Smits</maintainer>
 
